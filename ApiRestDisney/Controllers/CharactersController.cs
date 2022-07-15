@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiRestDisney.DataAccess;
 using ApiRestDisney.Models.DataModels;
+using ApiRestDisney.Services;
 
 namespace ApiRestDisney.Controllers
 {
@@ -16,15 +17,22 @@ namespace ApiRestDisney.Controllers
     {
         private readonly DisneyDbContext _context;
 
-        public CharactersController(DisneyDbContext context)
+        // Service
+        private readonly ICharactersService _charactersService;
+
+        public CharactersController(DisneyDbContext context, ICharactersService charactersService)
         {
             _context = context;
+            _charactersService = charactersService;
         }
 
         // GET: api/Characters
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Character>>> GetCharacters()
+        public async Task<ActionResult<IEnumerable<Character>>> GetCharacters(string name)
         {
+
+            _charactersService.GetCharactersByName(name);
+
           if (_context.Characters == null)
           {
               return NotFound();
