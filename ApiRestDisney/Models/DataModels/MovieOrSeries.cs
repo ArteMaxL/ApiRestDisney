@@ -5,22 +5,21 @@ namespace ApiRestDisney.Models.DataModels
 
     public class MovieOrSeries: BaseEntity
     {
-        [Required, StringLength(100)]
+        [Required (ErrorMessage = "The {0} is required."), StringLength(100)]
         public string Title { get; set; } = string.Empty;
 
-        public Calification Calification { get; set; }
+        [Range(1,5, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
+        public int Calification { get; set; }
+
+        public int GenreId { get; set; }
+
 
         // TODO: Characters associated
 
-         
-    }
+        [Required]
+        public ICollection<Character> Characters { get; set; } = new HashSet<Character>();
 
-    public enum Calification
-    {
-       One = 1,
-       Two = 2,
-       Three = 3,
-       Four = 4,
-       Five = 5
+        [Required]
+        public virtual Genre Genre { get; set; } = new Genre();
     }
 }

@@ -4,16 +4,16 @@ namespace ApiRestDisney.Models.DataModels
 {
     public class User: BaseEntity
     {
-        [Required, StringLength(50)]
+        [Required (ErrorMessage = "The {0} is required."), StringLength(50)]
         public string Name { get; set; } = string.Empty;
 
-        [Required, StringLength(100)]
+        [Required (ErrorMessage = "The {0} is required."), StringLength(100)]
         public string LastName { get; set; } = string.Empty;
 
-        [Required, EmailAddress]
+        [Required (ErrorMessage = "The {0} is required."), EmailAddress]
         public string Email { get; set; } = string.Empty;
 
-        [Required]
+        [Required (ErrorMessage = "The {0} is required.")]
         public string Password { get; set; } = string.Empty;
     }
 }

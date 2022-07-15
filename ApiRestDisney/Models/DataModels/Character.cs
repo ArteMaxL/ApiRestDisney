@@ -4,17 +4,20 @@ namespace ApiRestDisney.Models.DataModels
 {
     public class Character: BaseEntity
     {
-        [Required, StringLength(50)]
+        [Required (ErrorMessage = "The {0} is required."), StringLength(50)]
         public string Name { get; set; } = string.Empty;
 
-        [Required]
+        [Required (ErrorMessage = "The {0} is required.")]
         public int Age { get; set; }
 
-        public double Weight { get; set; }
+        public float Weight { get; set; }
 
         public String? History { get; set; }
 
         // TODO: Associate movies or series
+
+        [Required]
+        public ICollection<MovieOrSeries> MoviesOrSeries { get; set; } = new HashSet<MovieOrSeries> ();
 
     }
 }

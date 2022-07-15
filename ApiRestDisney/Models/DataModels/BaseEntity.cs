@@ -8,6 +8,7 @@ namespace ApiRestDisney.Models.DataModels
         [Key]
         public int Id { get; set; }
 
+        [Url]
         public string Imagen { get; set; } = string.Empty;
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
