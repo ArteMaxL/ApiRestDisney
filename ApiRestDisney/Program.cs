@@ -1,4 +1,15 @@
+// 1. Usings to work with EntityFramework
+using Microsoft.EntityFrameworkCore;
+using ApiRestDisney.DataAccess;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// 2. Connection with SQL Server Express
+const string CONNECTIONNAME = "DisneyDB";
+var connectionString = builder.Configuration.GetConnectionString(CONNECTIONNAME);
+
+// 3. Add Context to Services of builder
+builder.Services.AddDbContext<DisneyDbContext>(options => options.UseSqlServer(connectionString));
 
 // Add services to the container.
 
